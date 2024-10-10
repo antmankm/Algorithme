@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analyse de Phrase</title>
+    <style>
+        body {
+            background-color:black;
+            color: blue;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        input {
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid white;
+            border-radius: 5px;
+            background-color: #333;
+            color: white;
+        }
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #555;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #777;
+        }
+        p {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Analyse de Phrase</h1>
+    <input type="text" id="phrase" placeholder="Entrez une phrase se terminant par un point" />
+    <button onclick="analyserPhrase()">Analyser</button>
+    <p id="resultats"></p>
+
+    <script>
+        function analyserPhrase() {
+            const phrase = document.getElementById('phrase').value.trim();
+            if (!phrase.endsWith('.')) {
+                alert("La phrase doit se terminer par un point.");
+                return;
+            }
+
+            let longueur = phrase.length; // Longueur totale de la phrase
+            let nombreDeVoyelles = 0;
+            const voyelles = 'aeiouyAEIOUY';
+
+            // Compter les voyelles
+            for (let char of phrase) {
+                if (voyelles.includes(char)) {
+                    nombreDeVoyelles++;
+                }
+            }
+
+            // Compter les mots (en considérant que les mots sont séparés par des espaces)
+            let nombreDeMots = phrase.trim().split(/\s+/).length;
+
+            // Afficher les résultats
+            const resultats = `
+                Longueur de la phrase : ${longueur} caractères<br>
+                Nombre de mots : ${nombreDeMots}<br>
+                Nombre de voyelles : ${nombreDeVoyelles}
+            `;
+            document.getElementById('resultats').innerHTML = resultats;
+        }
+    </script>
+</body>
+</html>
